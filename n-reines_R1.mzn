@@ -19,6 +19,7 @@ constraint forall(i in 1..n)(
                endif
              ) 
            );
+           
 
 solve satisfy;
 output [if fix(q[j]) == i then "Q"
