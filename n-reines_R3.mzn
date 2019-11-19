@@ -1,6 +1,6 @@
 
 int: n;
-array [1..n, 1..n] of var 0..1: grille;
+array [1..n, 1..n] of var bool: grille;
 
 
 % Une et une seule reine par ligne 
