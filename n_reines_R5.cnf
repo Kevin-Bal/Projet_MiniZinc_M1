@@ -1,0 +1,4 @@
+c minisat n-reines_R5.cnf n-reines_R5.out -> pour lancer minisat
+p cnf 2 2
+
+

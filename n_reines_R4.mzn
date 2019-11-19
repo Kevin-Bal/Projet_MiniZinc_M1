@@ -1,7 +1,6 @@
-include "lex_lesseq.mzn";
 
 int: n;
-array [1..n, 1..n] of var bool: grille;
+array [1..n, 1..n] of var 0..1: grille;
 
 
 % Une et une seule reine par ligne 
@@ -13,7 +12,8 @@ constraint forall(i in 1..n)(
 constraint forall(j in 1..n)(
              sum(i in 1..n)(grille[i,j]) = 1
            );
-                    
+           
+           
 % 0 ou 1 reine par diagonale
 % Les deux conditions servent à éviter de parcourir 2 fois la même diagonale (les diagonales centrales)
 constraint forall(j in 0..n-1)(         
@@ -22,17 +22,19 @@ constraint forall(j in 0..n-1)(
              (sum(i in 1..n-j)(grille[n+1-i-j,i]) <= 1) /\
              (sum(i in j+1..n)(if n+1-i+j != i then grille[n+1-i+j,i] else 0 endif) <= 1)
            );    
-          
+           
+
 % Contrainte de symétrie
-constraint
-    lex_lesseq(array1d(grille), [ grille[j,i] | i,j in 1..n ])
-/\  lex_lesseq(array1d(grille), [ grille[i,j] | i in reverse(1..n), j in 1..n ])
-/\  lex_lesseq(array1d(grille), [ grille[j,i] | i in 1..n, j in reverse(1..n) ])
-/\  lex_lesseq(array1d(grille), [ grille[i,j] | i in 1..n, j in reverse(1..n) ])
-/\  lex_lesseq(array1d(grille), [ grille[j,i] | i in reverse(1..n), j in 1..n ])
-/\  lex_lesseq(array1d(grille), [ grille[i,j] | i,j in reverse(1..n) ])
-/\  lex_lesseq(array1d(grille), [ grille[j,i] | i,j in reverse(1..n) ])
-; 
+constraint forall(i in 1..n)(
+              forall(j in 1..n)(
+                if grille[i,j] = 1 then 
+                  grille[i,n+1-j] = 0 /\
+                  grille[j,i] = 0 /\
+                  grille[n+1-j,n+1-i] = 0 /\
+                  grille[n+1-i,j] = 0
+                endif
+              ) 
+           );
 
 solve satisfy;
 output [if fix(grille[i,j]) == 1 then "Q"
