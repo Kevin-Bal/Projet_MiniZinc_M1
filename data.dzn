@@ -1,50 +1,11 @@
-%A = [0,1,0,0,0,0,0,0,0,7];
+n=9;
 
-valeurCaseA0 = -1;
-valeurCaseA1 = 1;
-valeurCaseA2 = -1; 
-valeurCaseA3 = -1;
-valeurCaseA4 = -1;
-valeurCaseA5 = -1;
-valeurCaseA6 = -1;
-valeurCaseA7 = -1;
-valeurCaseA8 = -1;
-valeurCaseA9 = 7;
+A = [_,1,_,_,_,_,_,_,_,7];
+B = [_,3,_,_,_,_,_,_,_,_];
+C = [_,_,_,9,_,_,6,_,_,_];
+D = [_,_,_,_,_,_,8,_,_,_];
 
-valeurCaseB0 = -1;
-valeurCaseB1 = 3;
-valeurCaseB2 = -1;
-valeurCaseB3 = -1;
-valeurCaseB4 = -1;
-valeurCaseB5 = -1;
-valeurCaseB6 = -1;
-valeurCaseB7 = -1;
-valeurCaseB8 = -1;
-valeurCaseB9 = -1;
-
-valeurCaseC0 = -1;
-valeurCaseC1 = -1;
-valeurCaseC2 = -1;
-valeurCaseC3 = 9;
-valeurCaseC4 = -1;
-valeurCaseC5 = -1;
-valeurCaseC6 = 6;
-valeurCaseC7 = -1;
-valeurCaseC8 = -1;
-valeurCaseC9 = -1;
-
-valeurCaseD0 = -1;
-valeurCaseD1 = -1;
-valeurCaseD2 = -1;
-valeurCaseD3 = -1;
-valeurCaseD4 = -1;
-valeurCaseD5 = -1;
-valeurCaseD6 = -1;
-valeurCaseD7 = -1;
-valeurCaseD8 = 8;
-valeurCaseD9 = -1;
-
-valeurCaseAB = 2;
-valeurCaseBC = 2;
-valeurCaseCD = 4;
-valeurCaseDA = 3;
+AB = 2;
+BC = 2;
+CD = 4;
+DA = 3;
