@@ -49,7 +49,8 @@ constraint if opA[1] == "+" then A[case0]+A[case1]=A[case2]
            endif;  
            
 constraint if opA[2] == "+" then A[case2]+A[case3]=10*A[case4]+A[case5] 
-           else if opA[2] == "*" then A[case2]+A[case3]=10*A[case4]+A[case5] endif
+           else if opA[2] == "-" then A[case2]-A[case3]=10*A[case4]+A[case5] endif
+                else if opA[2] == "-" then A[case2]*A[case3]=10*A[case4]+A[case5] endif
            endif; 
                        
 constraint if opA[3] == "+" then A[case7]+A[case6]=A[case5] 
