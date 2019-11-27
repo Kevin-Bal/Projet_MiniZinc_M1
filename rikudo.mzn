@@ -45,13 +45,14 @@ var 1..taille : c36;
 
 %Le plateau rikudo
 array[1..taille+1] of var 0..taille : rikudo = 
-[c0, c1, c2, c3, 
-c4, c5, c6, c7, c8,
-c9, c10, c11, c12, c13, c14,
-c15, c16, c17, c18, c19, c20, c21,
-c22, c23, c24, c25, c26, c27,
-c28, c29, c30, c31, c32,
-c33, c34, c35, c36
+[
+  c0, c1, c2, c3, 
+  c4, c5, c6, c7, c8,
+  c9, c10, c11, c12, c13, c14,
+  c15, c16, c17, c18, c19, c20, c21,
+  c22, c23, c24, c25, c26, c27,
+  c28, c29, c30, c31, c32,
+  c33, c34, c35, c36
 ];
 
 %Le tableau qui contient le nombre de chaque case à chaque ligne
@@ -60,14 +61,12 @@ array[1..9] of int: indicesCasesDefinies = [0, 3, 4, 5, 17, 18, 20, 25, 29];
 
 predicate noExists(int:c) = forall(i in indicesCasesDefinies)(indicesCasesDefinies[i] != c);
 
-
 constraint c2 = 4;
 constraint c3 = 29;
 constraint c4 = 7;
 
 %Toutes les cases sont différentes
 constraint alldifferent(rikudo);
-
 
 %Pour chaque case de la ligne
 constraint forall(i in 1..7) (
@@ -86,7 +85,7 @@ constraint forall(i in 1..7) (
            \/if i != 7 then
            rikudo[indicesLignesRikudo[i+1]-indicesLignesRikudo[i]+c] = rikudo[c]+1
            \/rikudo[indicesLignesRikudo[i+1]-indicesLignesRikudo[i]+1+c] = rikudo[c]+1
-           endifdessous
+           endif
            %les 2 cases du dessus peuvent être égale à la case courante +1 
            \/if i != 1 then
            rikudo[indicesLignesRikudo[i]-indicesLignesRikudo[i-1]+c]+1 = rikudo[c]+1
@@ -96,6 +95,15 @@ constraint forall(i in 1..7) (
       )
 );
 
+%Tableau qui contient les couples des cases dont il y a un lien
+%indice case 1, indice case 2
+int: nombreDeLiens = 2;
+array[1..nombreDeLiens, 1..2] of int : liens = [|6,7
+                                                |7,8|];
+constraint forall(i in 1..nombreDeLiens) 
+(
+  rikudo[liens[i, 1]] = rikudo[liens[i, 2]] + 1
+);    
 
 solve satisfy;
 output [if (j==1 \/ j==34) then "   " ++ show(rikudo[j])
