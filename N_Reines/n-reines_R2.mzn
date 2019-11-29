@@ -10,20 +10,20 @@ constraint alldifferent([q[i] + i | i in 1..n]);  % 0 ou 1 reine par diagonale
 constraint alldifferent([q[i] - i | i in 1..n]);  %  "    "    "    "      
 
 
-%Retire les symétries Haut/Bas
+%Retire les symétries Nord / Sud
 constraint lex_lesseq(q,[q[i] | i in reverse(1..n)]);
 
-%Retire les symétries Gauche/Droite
+%Retire les symétries Est/Ouest
 array [1..n] of var 1..n: qreverseGD; 
 constraint forall(i in (1..n))(qreverseGD[i]=n+1-i);
 constraint lex_lesseq(q,qreverseGD);
 
-%Retire les symétries Diagonales HD/BG
+%Retire les symétries Diagonales Nord-Ouest / Sud-Est
 array [1..n] of var 1..n: qdiagonales1;
 constraint forall(i in (1..n))(qdiagonales1[q[i]]=i);
 constraint lex_lesseq(q,qdiagonales1);
 
-%Retire les symétries Diagonales BD/HG
+%Retire les symétries Diagonales Sud-Ouest/ Nord-Est
 array [1..n] of var 1..n: qdiagonales2;
 constraint forall(i in (1..n))(qdiagonales2[n+1-q[i]]=n+1-i);
 constraint lex_lesseq(q,qdiagonales2);
